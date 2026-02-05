@@ -10,6 +10,7 @@ namespace RazorBoatApp2026InClass.Pages.Boats
 
         private IBoatRepository _repo;
 
+        [BindProperty]
         public Boat BoatToUpdate { get; set; }
 
         public EditBoatModel(IBoatRepository boatRepository)
@@ -19,6 +20,18 @@ namespace RazorBoatApp2026InClass.Pages.Boats
         public void OnGet(string sailNumber)
         {
             BoatToUpdate =_repo.SearchBoat(sailNumber);
+        }
+
+        public IActionResult OnPostUpdate()
+        {
+            _repo.UpdateBoat(BoatToUpdate);
+            return RedirectToPage("Index");
+        }
+
+        public IActionResult OnPostDelete()
+        {
+            _repo.RemoveBoat(BoatToUpdate.SailNumber);
+            return RedirectToPage("Index");
         }
     }
 }
