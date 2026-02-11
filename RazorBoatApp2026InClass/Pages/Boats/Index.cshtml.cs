@@ -10,6 +10,8 @@ namespace RazorBoatApp2026InClass.Pages.Boats
         private IBoatRepository bRepo;
         public List<Boat> Boats { get; set; }
 
+        [BindProperty(SupportsGet=true)]
+        public string FilterCriteria { get; set; }
 
         public IndexModel(IBoatRepository boatRepository)
         {
@@ -17,7 +19,12 @@ namespace RazorBoatApp2026InClass.Pages.Boats
         }
         public void OnGet()
         {
-            Boats = bRepo.GetAllBoats();
+            if(!string.IsNullOrEmpty(FilterCriteria))
+            {
+                Boats = bRepo.FilterBoats(FilterCriteria);
+            }
+            else
+                Boats = bRepo.GetAllBoats();
         }
     }
 }

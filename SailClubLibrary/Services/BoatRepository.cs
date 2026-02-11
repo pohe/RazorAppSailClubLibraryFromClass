@@ -108,7 +108,15 @@ namespace SailClubLibrary.Services
 
         public List<Boat> FilterBoats(string filterCriteria)
         {
-            throw new NotImplementedException();
+            List<Boat> filteredBoats = new List<Boat>();
+            foreach(Boat b in _boats.Values)
+            {
+                if (b.Model.Contains(filterCriteria,StringComparison.CurrentCultureIgnoreCase))
+                {
+                    filteredBoats.Add(b);
+                }
+            }
+            return filteredBoats;
         }
         #endregion
     }
