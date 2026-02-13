@@ -10,6 +10,9 @@ namespace RazorBoatApp2026InClass.Pages.Boats
         private IBoatRepository bRepo;
         public List<Boat> Boats { get; set; }
 
+        [BindProperty(SupportsGet =true)]
+        public string SortBy { get; set; }
+
         [BindProperty(SupportsGet=true)]
         public string FilterCriteria { get; set; }
 
@@ -25,6 +28,12 @@ namespace RazorBoatApp2026InClass.Pages.Boats
             }
             else
                 Boats = bRepo.GetAllBoats();
+            SortBoats();
+        }
+
+        private void SortBoats()
+        {
+            throw new NotImplementedException();
         }
     }
 }
